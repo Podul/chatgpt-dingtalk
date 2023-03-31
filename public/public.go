@@ -24,13 +24,13 @@ func InitSvc() {
 func FirstCheck(rmsg *dingbot.ReceiveMsg) bool {
 	lc := UserService.GetUserMode(rmsg.SenderStaffId)
 	if lc == "" {
-		if Config.DefaultMode == "串聊" {
+		if Config.DefaultMode == cache.UserModeChats {
 			return true
 		} else {
 			return false
 		}
 	}
-	if lc != "" && strings.Contains(lc, "串聊") {
+	if lc != "" && strings.Contains(lc, cache.UserModeChats) {
 		return true
 	}
 	return false

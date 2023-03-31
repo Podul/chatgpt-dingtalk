@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/eryajf/chatgpt-dingtalk/pkg/cache"
 	"github.com/eryajf/chatgpt-dingtalk/pkg/logger"
 )
 
@@ -100,10 +101,11 @@ func LoadConfig() *Configuration {
 		}
 	})
 	if config.Model == "" {
-		config.DefaultMode = "gpt-3.5-turbo"
+		config.Model = "gpt-3.5-turbo"
 	}
-	if config.DefaultMode == "" {
-		config.DefaultMode = "单聊"
+
+	if cache.UserModeChat != config.DefaultMode && cache.UserModeChats != config.DefaultMode {
+		config.DefaultMode = cache.UserModeChat
 	}
 	if config.Port == "" {
 		config.Port = "8090"
