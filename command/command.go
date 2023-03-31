@@ -75,7 +75,9 @@ func ReceiveMsg(msgObj *dingbot.ReceiveMsg) error {
 	}
 
 	if strings.HasPrefix(content, CommandImage) {
-		return ReceiveImage(msgObj)
+		_, err := msgObj.ReplyToDingtalk(string(dingbot.TEXT), "图片生成还有问题，暂时不支持")
+		return err
+		// return ReceiveImage(msgObj)
 	}
 
 	var err error
@@ -149,8 +151,6 @@ func ReceiveImage(msg *dingbot.ReceiveMsg) error {
 	}
 	return process.ImageGenerate(msg)
 }
-
-func useTmpl(msg string)
 
 // case "余额":
 // 	cacheMsg := public.UserService.GetUserMode("system_balance")
