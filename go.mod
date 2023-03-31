@@ -1,6 +1,6 @@
 module github.com/eryajf/chatgpt-dingtalk
 
-go 1.18
+go 1.19
 
 require (
 	github.com/charmbracelet/log v0.2.1

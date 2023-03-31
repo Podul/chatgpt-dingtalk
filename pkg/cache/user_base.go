@@ -6,6 +6,11 @@ import (
 	"github.com/patrickmn/go-cache"
 )
 
+const (
+	UserModeChat  = "chat"
+	UserModeChats = "chats"
+)
+
 // UserServiceInterface 用户业务接口
 type UserServiceInterface interface {
 	// 用户聊天模式

@@ -1,7 +1,7 @@
 package public
 
 import (
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	"time"
 
@@ -34,24 +34,24 @@ type Billing struct {
 }
 
 // GetBalance 获取账号余额
-func GetBalance() (Billing, error) {
-	var data Billing
-	var url string = "https://api.openai.com/dashboard/billing/credit_grants"
-	if Config.BaseURL != "" {
-		url = Config.BaseURL + "/dashboard/billing/credit_grants"
-	}
-	resp, err := InitAiCli().R().Get(url)
-	if err != nil {
-		return data, err
-	}
-	err = json.Unmarshal(resp.Body(), &data)
-	if err != nil {
-		return data, err
-	}
-	t1 := time.Unix(int64(data.Grants.Data[0].EffectiveAt), 0)
-	t2 := time.Unix(int64(data.Grants.Data[0].ExpiresAt), 0)
-	msg := fmt.Sprintf("💵 已用: 💲%v\n💵 剩余: 💲%v\n⏳ 有效时间: 从 %v 到 %v\n", fmt.Sprintf("%.2f", data.TotalUsed), fmt.Sprintf("%.2f", data.TotalAvailable), t1.Format("2006-01-02 15:04:05"), t2.Format("2006-01-02 15:04:05"))
-	// 放入缓存
-	UserService.SetUserMode("system_balance", msg)
-	return data, nil
-}
+// func GetBalance() (Billing, error) {
+// 	var data Billing
+// 	var url string = "https://api.openai.com/dashboard/billing/credit_grants"
+// 	if Config.BaseURL != "" {
+// 		url = Config.BaseURL + "/dashboard/billing/credit_grants"
+// 	}
+// 	resp, err := InitAiCli().R().Get(url)
+// 	if err != nil {
+// 		return data, err
+// 	}
+// 	err = json.Unmarshal(resp.Body(), &data)
+// 	if err != nil {
+// 		return data, err
+// 	}
+// 	t1 := time.Unix(int64(data.Grants.Data[0].EffectiveAt), 0)
+// 	t2 := time.Unix(int64(data.Grants.Data[0].ExpiresAt), 0)
+// 	msg := fmt.Sprintf("💵 已用: 💲%v\n💵 剩余: 💲%v\n⏳ 有效时间: 从 %v 到 %v\n", fmt.Sprintf("%.2f", data.TotalUsed), fmt.Sprintf("%.2f", data.TotalAvailable), t1.Format("2006-01-02 15:04:05"), t2.Format("2006-01-02 15:04:05"))
+// 	// 放入缓存
+// 	UserService.SetUserMode("system_balance", msg)
+// 	return data, nil
+// }

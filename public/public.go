@@ -18,7 +18,7 @@ func InitSvc() {
 	Config = config.LoadConfig()
 	Prompt = config.LoadPrompt()
 	UserService = cache.NewUserService()
-	_, _ = GetBalance()
+	// _, _ = GetBalance()
 }
 
 func FirstCheck(rmsg *dingbot.ReceiveMsg) bool {
