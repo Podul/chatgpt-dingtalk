@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/eryajf/chatgpt-dingtalk/pkg/cache"
 	"github.com/eryajf/chatgpt-dingtalk/pkg/dingbot"
 	"github.com/eryajf/chatgpt-dingtalk/pkg/logger"
 	"github.com/eryajf/chatgpt-dingtalk/pkg/process"
@@ -86,12 +85,7 @@ func ReceiveMsg(msgObj *dingbot.ReceiveMsg) error {
 		return err
 	}
 
-	if public.FirstCheck(msgObj) {
-		return process.Do(cache.UserModeChat, msgObj)
-	} else {
-		return process.Do(cache.UserModeChats, msgObj)
-	}
-
+	return process.Do(msgObj)
 }
 
 // 发送欢迎信息

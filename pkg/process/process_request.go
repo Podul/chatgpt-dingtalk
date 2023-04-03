@@ -14,8 +14,13 @@ import (
 )
 
 // 执行处理请求
-func Do(mode string, rmsg *dingbot.ReceiveMsg) error {
-	// 先把模式注入
+func Do(rmsg *dingbot.ReceiveMsg) error {
+	mode := public.UserService.GetUserMode(rmsg.SenderStaffId)
+	if mode == "" {
+		mode = public.Config.DefaultMode
+	}
+
+	// 把模式注入
 	public.UserService.SetUserMode(rmsg.SenderStaffId, mode)
 	switch mode {
 	case cache.UserModeChat:
